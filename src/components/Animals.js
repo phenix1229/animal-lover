@@ -1,4 +1,5 @@
 import React from 'react';
+import './animals.css'
 
 let animals = [
     {
@@ -32,12 +33,12 @@ let animals = [
     {
         image: 'images/akela.webp',
         type: 'Wolf',
-        name: 'Raksha',
+        name: 'Akela',
         description: 'Akela is the alpha of the wolf pack that adopted Mowgli.',
         animalId: 5
     },
     {
-        image: 'images/raksha.',
+        image: 'images/raksha.webp',
         type: 'Wolf',
         name: 'Raksha',
         description: 'Raksha is a female wolf and Mowglis adoptive mother.',
@@ -107,12 +108,31 @@ class Animals extends React.Component {
     }
     render() {
         return (
-            <div>
-                <div>
-                    <button onClick={this.handleLike}>Like</button>
-                    <button onClick={this.handleDislike}>Dislike</button>
-                    <button onClick={this.handleDiscard}>Discard</button>
-                </div>
+            <div id='wrapper'>
+            <div id='main'>
+                {this.state.animals.map((animal, idx) => {
+                    return (
+                        <div className='card'>
+                            <div className='cardImage'>
+                                <img src={animal.image} alt='.' />
+                            </div>
+                            <div className='cardText'>
+                                <p>{animal.name}</p>
+                                <p>{animal.type}</p>
+                                <p>{animal.description}</p>
+                                <br />
+                            </div>
+                            <div className='cardBtns'>
+                                <button className='likeBtn' onClick={this.handleLike}>Like</button>
+                                <button className='dislikeBtn' onClick={this.handleDislike}>Dislike</button>
+                                <button className='discardBtn' onClick={this.handleDiscard}>Discard</button>
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
+            <div className='sideBar'>
+            </div>
             </div>
         );
     };

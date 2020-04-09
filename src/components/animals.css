@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+#main {
+    grid-column: 1/4;
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.card {
+    width: 300px;
+    height: 400px;
+    border: 1px solid gray;
+    border-radius: 5%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 6fr 2.5fr 1.5fr;
+    align-self: center;
+    margin: 30px;
+}
+
+.cardImage {
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+
+.cardImage > img {
+    width: 300px;
+    max-height: 450px;
+    border-top-right-radius: 5%;
+    border-top-left-radius: 5%;
+}
+
+.cardText {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    padding-left: 10px;
+}
+
+.cardBtns {
+    grid-column: 1/2;
+    grid-row: 3/4;
+    padding-left: 10px;
+}
+
+.likeBtn {
+    border: 1px solid green;
+    border-radius: 2%;
+    font-size: 16px;
+    padding: 5px;
+}
+
+.dislikeBtn {
+    border: 1px solid red;
+    border-radius: 2%;
+    font-size: 16px;
+    padding: 5px;
+}
+
+.discardBtn {
+    border: 1px solid grey;
+    border-radius: 2%;
+    font-size: 16px;
+    padding: 5px;
+}
