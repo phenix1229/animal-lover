@@ -10,7 +10,18 @@
 
 #main {
     grid-column: 1/4;
-    margin-top: 100px;
+    display: grid;
+    grid-template-rows: 100px auto;
+}
+
+#header {
+    grid-row: 1/2;
+    height: 100px;
+    padding: 30px 0px 0px 50px;
+}
+
+#cards {
+    grid-row: 2/3;
     display: grid;
     grid-template-columns: auto auto auto;
 }
@@ -53,21 +64,75 @@
 
 .likeBtn {
     border: 1px solid green;
-    border-radius: 2%;
+    border-radius: 10%;
+    background-color: green;
+    color: white;
     font-size: 16px;
     padding: 5px;
+    margin-right: 5px;
 }
 
 .dislikeBtn {
     border: 1px solid red;
-    border-radius: 2%;
+    border-radius: 10%;
+    background-color: red;
+    color: white;
     font-size: 16px;
     padding: 5px;
+    margin-right: 5px;
 }
 
 .discardBtn {
     border: 1px solid grey;
-    border-radius: 2%;
+    border-radius: 10%;
+    background-color: grey;
+    color: white;
     font-size: 16px;
     padding: 5px;
+}
+
+#sidebar {
+    grid-column: 4/5;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+#likesArea {
+    grid-row: 1/2;
+    text-align: center;
+}
+
+#dislikesArea {
+    grid-row: 2/3;
+    text-align: center;
+    justify-items: center;
+}
+
+.sideTitle {
+    margin-top: 20px;
+}
+
+.smallCard {
+    width: 250px;
+    margin: 20px;
+    border: 1px solid grey;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.smallCardImage {
+    grid-column: 1/2;
+    background-color: black;
+}
+
+.smallCardImage > img {
+    max-width: 150px;
+}
+
+.smallCardText {
+    grid-column: 2/3;
+    text-align: center;
+    padding-top: 45%;
+    background-color: rgb(80, 80, 80);
+    color: white;
 }

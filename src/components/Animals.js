@@ -10,7 +10,7 @@ let animals = [
         animalId: 1
     },
     {
-        image: 'images/rocket.webp',
+        image: 'images/rocket.png',
         type: 'Ape',
         name: 'Rocket',
         description: 'Rocket is a chimpanzee, former enemy turned friend of Caesar and second in command of the apes.',
@@ -31,14 +31,14 @@ let animals = [
         animalId: 4
     },
     {
-        image: 'images/akela.webp',
+        image: 'images/akela.png',
         type: 'Wolf',
         name: 'Akela',
         description: 'Akela is the alpha of the wolf pack that adopted Mowgli.',
         animalId: 5
     },
     {
-        image: 'images/raksha.webp',
+        image: 'images/raksha.png',
         type: 'Wolf',
         name: 'Raksha',
         description: 'Raksha is a female wolf and Mowglis adoptive mother.',
@@ -52,7 +52,7 @@ let animals = [
         animalId: 7
     },
     {
-        image: 'images/grey-brother.webp',
+        image: 'images/grey-brother.png',
         type: 'Wolf',
         name: 'Grey-Brother',
         description: 'Grey-Brother is a young male wolf and Mowglis adoptive brother',
@@ -73,7 +73,7 @@ let animals = [
         animalId: 10
     },
     {
-        image: 'images/jaws3.jpg',
+        image: 'images/worst-shark.jpg',
         type: 'Shark',
         name: 'Worst Shark',
         description: 'Worst Shark was the star of the terrible Jaws 3D.',
@@ -97,41 +97,104 @@ class Animals extends React.Component {
             dislikes: []
         }
     }
-    handleLike = (animalId) => {
-        this.setState({likes: this.likes.concat(animalId)})
+    handleLike = (animal) => {
+        if(!this.state.likes.includes(animal)){
+            if(this.state.dislikes.includes(animal)){
+                let newDislikes = this.state.dislikes.filter(item => item !== animal);
+                this.setState({dislikes: newDislikes});
+            };
+            this.setState({likes: this.state.likes.concat(this.state.animals.filter(item => item === animal))});
+        }
+        console.log(this.state.likes)
     }
-    handleDislike = (animalId) => {
-        this.setState({dislikes: this.dislikes.concat(animalId)})
+    handleDislike = (animal) => {
+        if(!this.state.dislikes.includes(animal)){
+            if(this.state.likes.includes(animal)){
+                let newLikes = this.state.likes.filter(item => item !== animal);
+                this.setState({likes: newLikes});
+            };
+            this.setState({dislikes: this.state.dislikes.concat(this.state.animals.filter(item => item === animal))})
+        }
+        console.log(this.state.dislikes)
     }
-    handleDiscard = (animalId) => {
-
+    handleDiscard = (animal) => {
+        let newAnimals = this.state.animals.filter(item => item !== animal);
+        let newLikes = this.state.likes.filter(item => item !== animal);
+        let newDislikes = this.state.dislikes.filter(item => item !== animal);
+        this.setState({animals:newAnimals, likes:newLikes, dislikes: newDislikes});
+    }
+    handleClear = (animal, state) => {
+        if(state === this.state.likes){
+            let newLikes = this.state.likes.filter(item => item !== animal);
+            this.setState({likes: newLikes});
+        } else if (state === this.state.dislikes){
+            let newDislikes = this.state.dislikes.filter(item => item !== animal);
+            this.setState({dislikes: newDislikes});
+        }
+        console.log(state)
     }
     render() {
         return (
             <div id='wrapper'>
             <div id='main'>
+                <div id='header'>
+                    <h1>Animal Lover</h1>
+                </div>
+                <div id='cards'>
                 {this.state.animals.map((animal, idx) => {
                     return (
-                        <div className='card'>
+                        <div key={animal.animalId} className='card'>
                             <div className='cardImage'>
                                 <img src={animal.image} alt='.' />
                             </div>
                             <div className='cardText'>
                                 <p>{animal.name}</p>
-                                <p>{animal.type}</p>
-                                <p>{animal.description}</p>
+                                <p style={{opacity:'50%'}}>{animal.type}</p>
+                                <p style={{opacity:'70%'}}>{animal.description}</p>
                                 <br />
                             </div>
                             <div className='cardBtns'>
-                                <button className='likeBtn' onClick={this.handleLike}>Like</button>
-                                <button className='dislikeBtn' onClick={this.handleDislike}>Dislike</button>
-                                <button className='discardBtn' onClick={this.handleDiscard}>Discard</button>
+                                <button className='likeBtn' onClick={()=> {this.handleLike(animal)}}>Like</button>
+                                <button className='dislikeBtn' onClick={()=> {this.handleDislike(animal)}}>Dislike</button>
+                                <button className='discardBtn' onClick={()=> {this.handleDiscard(animal)}}>Discard</button>
                             </div>
                         </div>
                     )
                 })}
+                </div>
             </div>
             <div className='sideBar'>
+                <div id='likesArea'>
+                <br />
+                    <h2 className='sideTitle'>Likes</h2>
+                    {this.state.likes.map((animal, idx) => {
+                        return (
+                            <div onClick={()=> {this.handleClear(animal, this.state.likes)}} key={animal.animalId} className='smallCard'>
+                                <div className='smallCardImage'>
+                                    <img src={animal.image} alt='.' />
+                                </div>
+                                <div className='smallCardText'>
+                                    <p>{animal.name}</p>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
+                <div id='dislikesArea'>
+                    <h2 className='sideTitle'>Dislikes</h2>
+                    {this.state.dislikes.map((animal, idx) => {
+                        return (
+                            <div onClick={()=> {this.handleClear(animal, this.state.dislikes)}} key={animal.animalId} className='smallCard'>
+                                <div className='smallCardImage'>
+                                    <img src={animal.image} alt='.' />
+                                </div>
+                                <div className='smallCardText'>
+                                    <p>{animal.name}</p>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
             </div>
         );
