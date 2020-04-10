@@ -105,7 +105,6 @@ class Animals extends React.Component {
             };
             this.setState({likes: this.state.likes.concat(this.state.animals.filter(item => item === animal))});
         }
-        console.log(this.state.likes)
     }
     handleDislike = (animal) => {
         if(!this.state.dislikes.includes(animal)){
@@ -115,7 +114,6 @@ class Animals extends React.Component {
             };
             this.setState({dislikes: this.state.dislikes.concat(this.state.animals.filter(item => item === animal))})
         }
-        console.log(this.state.dislikes)
     }
     handleDiscard = (animal) => {
         let newAnimals = this.state.animals.filter(item => item !== animal);
@@ -131,7 +129,6 @@ class Animals extends React.Component {
             let newDislikes = this.state.dislikes.filter(item => item !== animal);
             this.setState({dislikes: newDislikes});
         }
-        console.log(state)
     }
     render() {
         return (
@@ -165,7 +162,6 @@ class Animals extends React.Component {
             </div>
             <div className='sideBar'>
                 <div id='likesArea'>
-                <br />
                     <h2 className='sideTitle'>Likes</h2>
                     {this.state.likes.map((animal, idx) => {
                         return (
